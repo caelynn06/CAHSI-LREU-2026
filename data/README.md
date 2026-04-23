@@ -7,6 +7,10 @@
 ### Imaging Features
 - 922 patients MRI imaging features information
 - 539 features with radiomic, measurments, and classification
+  
+### Missing Values and Data Leakage
+A leakage audit was conducted prior to modelling, excluding treatment variables, surgical outcomes, and post-diagnosis follow-up data to ensure predictors reflected only information available at diagnosis.
+Synthetic data augmentation was deemed impractical given high missingness relative to sample size, as generative approaches require dense feature spaces and risk amplifying noise.
 
 To reproduce this work, download the dataset from TCIA and place the files in the data/ folder.
 
