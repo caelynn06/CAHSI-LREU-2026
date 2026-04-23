@@ -7,6 +7,15 @@
 This project investigates whether quantitative MRI radiomic features or structured clinical features are more predictive of two clinically relevant breast cancer outcomes: tumor T-stage (T0/T1 vs. T2+) and definitive surgery type (mastectomy vs. breast-conserving surgery). Gradient boosting classifiers (CatBoost) were trained on clinical features alone, imaging radiomic features alone, and a fusion of both, then evaluated within a nested cross-validation framework.
 The central finding is that each modality predicts what it measures: radiomic features substantially outperform clinical features for T-stage prediction, while clinical features outperform radiomics for surgical planning. Fusion models provided no meaningful improvement in either case.
 
+### Methodology
+Models were evaluated using **nested 5-fold stratified cross-validation**:
+- **Inner loop** — CatBoost trained on inner training folds, permutation importance computed on inner validation folds, top features selected
+- **Outer loop** — Final model trained on selected features, evaluated on held-out test fold
+- Out-of-fold predictions pooled across all 5 outer folds for final performance estimates
+- No information from the test fold influences feature selection or model training at any stage
+
+Three feature sets were compared per outcome: clinical only, imaging only, and fusion.
+All predicted probabilities post-hoc calibrated using Platt scaling.
 ### Results Summary
 | Target | Model | N | AUC | 95% CI | ECE | Brier |
 |:---|:---|---:|---:|:---:|---:|---:|
