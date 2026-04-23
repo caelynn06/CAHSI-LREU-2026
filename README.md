@@ -22,7 +22,33 @@ The central finding is that each modality predicts what it measures: radiomic fe
 - Clinical features outperform imaging radiomics for surgical planning (AUC 0.714 vs. 0.668)
 Fusion models provide no significant improvement over the best single-modality model for either outcome
 - The dominant radiomic predictor for T-stage was washin-rate texture heterogeneity; the dominant clinical predictor for surgery was multicentric or multifocal disease
+### How to Reproduce
+```
+# 1. Install dependencies
+pip install -r requirements.txt
 
+# 2. Download data from TCIA and place in data/
+
+# 3. Run T-stage pipeline
+python pipeline/staging_pipeline_clean.py
+
+# 4. Run surgery pipeline
+python pipeline/surgery_pipeline.py A
+
+# 5. Run feature importance
+python pipeline/tstage_clinical_importance.py
+python pipeline/surgery_feature_importance.py
+
+# 6. Run calibration
+python calibration/calibration_all_models.py
+
+# 7. Generate figures
+python figures/poster_fig1_roc_v4.py
+python figures/poster_fig2_final_v3.py
+python figures/poster_fig3_calibration_v2.py
+python figures/poster_fig4_table_v3.py
+python figures/poster_fig5_distributions_v2.py
+```
 ### Acknowledgements
 This material is based upon work supported by the National Science Foundation under Grant Numbers CNS-2137781 and HRD-1834620. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.
 
